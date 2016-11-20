@@ -9,7 +9,7 @@
 	    xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="数据查看窗口" Height="300" Width="400">
+        Title="数据查看窗口" Height="600" Width="600">
     <controls:MetroWindow.IconTemplate>
         <DataTemplate>
             <Grid Width="{TemplateBinding Width}"
@@ -27,11 +27,64 @@
         </DataTemplate>
     </controls:MetroWindow.IconTemplate>
     <Grid>
-        <DataGrid x:Name="dataGrid" 
-                  HorizontalAlignment="Stretch" 
-                  Margin="10,10,10,10" 
-                  VerticalAlignment="Stretch" 
+        <TabControl>
+            <TabItem Header="数据查询">
+                <Grid>
+                    <Button Content="   执行   "
+                    x:Name="button1" 
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Margin="0,10,10,0"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource AccentedSquareButtonStyle}"
+                    Click="button1_Click"
+                    />
+                    <TextBox Name="text1"
+                 controls:TextBoxHelper.Watermark="SQL命令"
+                 Height="30"
+                 Width="500"
+                 Margin="10,10,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 />
+                    <DataGrid x:Name="dataGrid" 
+                  Margin="10,50,10,10" 
                   ItemsSource="{Binding}" 
                   />
+                </Grid>
+            </TabItem>
+            <TabItem Header="执行多条SQL语句">
+                <Grid>
+                    <Button Content="   执行   "
+                    x:Name="button2" 
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Margin="0,10,10,0"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource AccentedSquareButtonStyle}"
+                    Click="button2_Click"
+                    />
+                    <Button Content="   清除   "
+                    x:Name="button3" 
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Margin="0,45,10,0"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource AccentedSquareButtonStyle}"
+                    Click="button3_Click"
+                    />
+                    <TextBox Name="text2"
+                 controls:TextBoxHelper.Watermark="SQL命令"
+                 Width="500"
+                 Margin="10,10,0,0"
+                 HorizontalAlignment="Left"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Visible"
+                 />
+                    
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </controls:MetroWindow>

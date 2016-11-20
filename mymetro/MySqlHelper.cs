@@ -14,7 +14,7 @@ namespace mymetro
 	public abstract class MySqlHelper
 	{
 		//数据库连接字符串
-		public static string Conn = "Database='airline';Data Source='localhost';User Id='root';Password='jisuozhao123';charset='utf8';pooling=true";
+		public static string Conn = "Database='airline';Data Source='localhost';User Id='root';Password='229796';charset='utf8';pooling=true";
 
 		// 用于缓存参数的HASH表
 		private static Hashtable parmCache = Hashtable.Synchronized(new Hashtable());

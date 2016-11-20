@@ -24,6 +24,7 @@ namespace mymetro
 	/// </summary>
 	public abstract class Tools
 	{
+		public static bool warning = false;//是否显示警告
 		/// <summary>
 		/// 连接数据库，将要显示的表显示在dataGrid中
 		/// </summary>
@@ -36,11 +37,21 @@ namespace mymetro
 			dataGrid.DataContext= MySqlHelper.GetDataSet(MySqlHelper.Conn, CommandType.Text, "select * from "+tableName, null).Tables[tableIndex].DefaultView;
 		}
 		/// <summary>
-		/// 通过sql命令插入数据，插入成功返回true，不成功返回false
+		/// 将DataSet的第index个表显示在dataGrid中
+		/// </summary>
+		/// <param name="dataGrid"></param>
+		/// <param name="ds"></param>
+		/// <param name="tableIndex"></param>
+		public static void showDataTable(DataGrid dataGrid,DataSet ds,int tableIndex)
+		{
+			dataGrid.DataContext = ds.Tables[tableIndex].DefaultView;
+		}
+		/// <summary>
+		/// 执行sql命令，执行成功返回true，不成功返回false
 		/// </summary>
 		/// <param name="sqlcmd"></param>
 		/// <returns></returns>
-		public static bool insertData(String sqlcmd)
+		public static bool executeSqlCmd(String sqlcmd)
 		{
 			try
 			{
@@ -48,9 +59,51 @@ namespace mymetro
 			}
 			catch (Exception e1)
 			{
+				//Console.WriteLine(e1);
 				return false;
 			}
 			return true;
+		}
+		/// <summary>
+		/// 通过指定SQL命令获取数据集DataSet
+		/// </summary>
+		/// <param name="sqlcmd"></param>
+		/// <returns></returns>
+		public static DataSet getDataSet(String sqlcmd)
+		{
+			try
+			{
+				DataSet ds = MySqlHelper.GetDataSet(MySqlHelper.Conn, CommandType.Text, sqlcmd, null);
+				if(warning)Tools.messageBox("数据库读取成功");
+				return ds;
+			}
+			catch (Exception e2)
+			{
+				if(warning)Tools.messageBox("数据库读取失败");
+				return null;
+			}
+			
+		}
+		/// <summary>
+		/// 获取数据表，sqlcmd是sql命令，index是表的序号，一般为0
+		/// </summary>
+		/// <param name="sqlcmd"></param>
+		/// <param name="index"></param>
+		/// <returns></returns>
+		public static DataTable getDataTable(String sqlcmd,int index)
+		{
+			try
+			{
+				DataTable dt = MySqlHelper.GetDataSet(MySqlHelper.Conn, CommandType.Text, sqlcmd, null).Tables[index];
+				if (warning) Tools.messageBox("数据库读取成功");
+				return dt;
+			}
+			catch (Exception e3)
+			{
+				if (warning) Tools.messageBox("数据库读取失败");
+				return null;
+			}
+
 		}
 		/// <summary>
 		/// 弹出提示框，输入的提示信息
@@ -59,6 +112,15 @@ namespace mymetro
 		public static void messageBox(String str)
 		{
 			MessageBox.Show(str);
+		}
+		/// <summary>
+		/// 弹出Preview窗体，预览DataTable的数据
+		/// </summary>
+		/// <param name="dt"></param>
+		public static void previewDataTable(DataTable dt)
+		{
+			dataWindow dw = new dataWindow(dt);//显示dt查询结果
+			dw.Show();//显示查询结果
 		}
 	}
 }

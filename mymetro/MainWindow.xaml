@@ -9,7 +9,7 @@
 	    xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="主窗口" Height="350" Width="525" >
+        Title="飞哪儿机票管理系统" Height="350" Width="525" >
     <controls:MetroWindow.IconTemplate>
         <DataTemplate>
             <Grid Width="{TemplateBinding Width}"
@@ -20,7 +20,7 @@
                  RenderOptions.BitmapScalingMode="HighQuality">
                 <Rectangle>
                     <Rectangle.Fill>
-                        <VisualBrush Visual="{StaticResource appbar_home}" />
+                        <VisualBrush Visual="{StaticResource appbar_plane}" />
                     </Rectangle.Fill>
                 </Rectangle>
             </Grid>
@@ -33,25 +33,97 @@
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="97*"/>
+            <ColumnDefinition Width="420*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="2">
+            <TabItem Header="个人">
+                <Grid>
+                    <Rectangle Height="100" Width="100" Margin="10,10,401,165" >
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource appbar_people}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBox Name="userId_text" controls:TextBoxHelper.Watermark="用户名" Height="40" Width="300" Margin="125,10,86,235"/>
+                    <PasswordBox x:Name="password_text" controls:TextBoxHelper.Watermark="密码"  Height="40" Width="300" Margin="125,70,86,165"/>
+                    <Button Content="登录"
+                    x:Name="login_button" 
+                    Width="60"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,100,0"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource AccentedSquareButtonStyle}"
+                    Click="login_button_Click"
+                    />
 
-        <TextBox Text="Hello world"
-                   Height="23"
-                   Margin="10,10,10,0"
-                   Name="textBox1"
-                 VerticalAlignment="Top"
+                </Grid>
+            </TabItem>
+            <TabItem Header="公司" >
+                <Grid>
+                    <Rectangle Height="100" Width="100" Margin="10,10,401,165" >
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource appbar_plane_rotated_135}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBox Name="admin_text" controls:TextBoxHelper.Watermark="管理员账号" Height="40" Width="300" Margin="125,10,86,235"/>
+                    <PasswordBox x:Name="adminPassword_text" controls:TextBoxHelper.Watermark="口令"  Height="40" Width="300" Margin="125,70,86,165"/>
+                    <Button Content="进入"
+                    x:Name="comein_button" 
+                    Width="60"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,100,0"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource AccentedSquareButtonStyle}"
+                    Click="comein_button_Click"
+                    />
+                </Grid>
+            </TabItem>
+            <TabItem Header="数据管理">
+                <Grid>
+                    <Rectangle Height="100" Width="100" Margin="10,10,401,165" >
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource appbar_database_sql}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Button Content="    test    "
+                    x:Name="button1" 
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,0"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource AccentedSquareButtonStyle}"
+                    Click="button1_Click"
+                    />
+                    <ListBox x:Name="listBox" 
+                             HorizontalAlignment="Left" 
+                             Height="223" 
+                             Margin="140,10,0,0" 
+                             VerticalAlignment="Top" 
+                             Width="298">
+                        <ListBoxItem Content="单击[连接]按钮可查看现有的数据表"/>
+
+                    </ListBox>
+                    <TextBox x:Name="dataBaseName_text" controls:TextBoxHelper.Watermark="数据库名称"  Height="24" Margin="10,115,401,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100"/>
+                    <PasswordBox x:Name="dataBasePassword_text" controls:TextBoxHelper.Watermark="口令"  Height="24" Margin="10,146,401,0"   VerticalAlignment="Top" Width="100"/>
+                    <Button Content="连接"
+                        x:Name="mytest_button" 
+                        Width="100"
+                        Margin="10,177,401,70"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource AccentedSquareButtonStyle}"
+                        Click="mytest_button_Click"
+                    />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <TextBox controls:TextBoxHelper.Watermark="状态栏"
+                   Margin="10,0,10,10"
+                   Name="status_text"
+                 VerticalAlignment="Bottom" Grid.ColumnSpan="2"
                    />
-        <Button Content="显示数据"
-                
-                Name="button1" 
-                Height="30"
-                HorizontalAlignment="Right"
-                Margin="0,40,10,0"
-                VerticalAlignment="Top"
-                Style="{StaticResource AccentedSquareButtonStyle}"
-                Click="button1_Click"
-                
-                />
-        
+
+
 
     </Grid>
 </controls:MetroWindow>
